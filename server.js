@@ -45,22 +45,22 @@ app.use("/api/reviews", reviewRouter);
 
 app.use(errorHandler);
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-//   const path = require("path");
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  const path = require("path");
 
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-//   });
-// }
-if (process.env.NODE_ENV == 'production') {
-  const path = require('path')
-
-  app.get('/', (req, res) => {
-    app.use(express.static(path.resolve(__dirname, 'client', 'build')))
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  })
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
 }
+// if (process.env.NODE_ENV == 'production') {
+//   const path = require('path')
+
+//   app.get('/', (req, res) => {
+//     app.use(express.static(path.resolve(__dirname, 'client', 'build')))
+//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+//   })
+// }
 app.use(notFound);
 app.listen(port, () => {
   console.log(`Connection successful at ${port}`);
