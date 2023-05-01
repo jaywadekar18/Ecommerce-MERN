@@ -54,6 +54,7 @@ app.use(errorHandler);
 //   });
 // }
 if (process.env.NODE_ENV == 'production') {
+  console.log("in")
   const path = require('path')
 
   app.get('/', (req, res) => {
