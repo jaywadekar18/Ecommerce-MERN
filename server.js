@@ -9,10 +9,10 @@ const cartRouter = require("./routes/cartRouter");
 const orderRouter = require("./routes/orderRouter");
 const reviewRouter = require("./routes/reviewRouter");
 const { errorHandler, notFound } = require("./middleware/errorHandler");
-const { MOGOURI } = require('./config/keys')
+const { MOGOURI } = require("./config/keys");
 mongoose
   .connect(
-    'mongodb+srv://jaywadekar:jaywadekar@cluster0.8p6ea.mongodb.net/ecommerce?retryWrites=true&w=majority',
+    "mongodb+srv://jaywadekar:jaywadekar@cluster0.8p6ea.mongodb.net/ecommerce?retryWrites=true&w=majority?directConnection=true",
     { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true }
   )
   .then(() => {
@@ -53,14 +53,14 @@ app.use(errorHandler);
 //     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 //   });
 // }
-if (process.env.NODE_ENV == 'production') {
-  console.log("in")
-  const path = require('path')
+if (process.env.NODE_ENV == "production") {
+  console.log("in");
+  const path = require("path");
 
-  app.get('/', (req, res) => {
-    app.use(express.static(path.resolve(__dirname, 'client', 'build')))
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  })
+  app.get("/", (req, res) => {
+    app.use(express.static(path.resolve(__dirname, "client", "build")));
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
 }
 app.use(notFound);
 app.listen(port, () => {
