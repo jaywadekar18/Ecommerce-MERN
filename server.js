@@ -12,7 +12,7 @@ const { errorHandler, notFound } = require("./middleware/errorHandler");
 const { MOGOURI } = require('./config/keys')
 mongoose
   .connect(
-    MOGOURI,
+    'mongodb+srv://jaywadekar:jaywadekar@cluster0.8p6ea.mongodb.net/ecommerce?retryWrites=true&w=majority',
     { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true }
   )
   .then(() => {
