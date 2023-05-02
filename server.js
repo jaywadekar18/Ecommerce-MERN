@@ -12,7 +12,7 @@ const { errorHandler, notFound } = require("./middleware/errorHandler");
 const { MOGOURI } = require("./config/keys");
 mongoose
   .connect(
-    "mongodb+srv://jaywadekar:jaywadekar@cluster0.8p6ea.mongodb.net/ecommerce?retryWrites=true&w=majority?directConnection=true",
+    "mongodb+srv://jaywadekar:jaywadekar@cluster0.8p6ea.mongodb.net/ecommerce?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true }
   )
   .then(() => {
@@ -45,23 +45,23 @@ app.use("/api/reviews", reviewRouter);
 
 app.use(errorHandler);
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-//   const path = require("path");
-
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-//   });
-// }
-if (process.env.NODE_ENV == "production") {
-  console.log("in");
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
   const path = require("path");
 
-  app.get("/", (req, res) => {
-    app.use(express.static(path.resolve(__dirname, "client", "build")));
+  app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
+// if (process.env.NODE_ENV == "production") {
+//   console.log("in");
+//   const path = require("path");
+
+//   app.get("/", (req, res) => {
+//     app.use(express.static(path.resolve(__dirname, "client", "build")));
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   });
+// }
 app.use(notFound);
 app.listen(port, () => {
   console.log(`Connection successful at ${port}`);
